@@ -6,14 +6,31 @@
 //  Copyright © 2016 Nikolas Burk. All rights reserved.
 //
 
+
+// Friend Class
 class Friend {
-  
-  let name: String
-  var mood: Mood
-  
-  init(name: String, mood: Mood){
-    self.name = name
-    self.mood = mood
-  }
-  
+    
+    // Properties
+    let name: String
+    var mood: Mood
+    
+    // Initializers
+    init(name: String, mood: Mood){
+        self.name = name
+        self.mood = mood
+    }
+    
 }
+
+// version 1.0 from master iOS-MVC nikolas make-school-18
+//class Friend {
+//  
+//  let name: String
+//  var mood: Mood
+//  
+//  init(name: String, mood: Mood){
+//    self.name = name
+//    self.mood = mood
+//  }
+//  
+//}

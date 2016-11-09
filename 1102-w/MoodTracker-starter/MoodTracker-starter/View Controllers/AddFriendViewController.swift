@@ -30,7 +30,6 @@ class AddFriendViewController: UIViewController {
   
   
   // MARK: Helpers
-  
   func dismissViewController() {
     presentingViewController?.dismiss(animated: true)
   }
