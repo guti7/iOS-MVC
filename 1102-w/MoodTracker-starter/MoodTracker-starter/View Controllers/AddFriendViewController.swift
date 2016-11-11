@@ -62,12 +62,6 @@ class AddFriendViewController: UIViewController {
         presentingViewController?.dismiss(animated: true)
     }
     
-    
-    func nameInputValidation() {
-        // TODO: Is this method needed?
-    }
-    
-    
 }
 
 // MARK: - Extensions
