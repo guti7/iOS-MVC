@@ -89,7 +89,7 @@
                     <navigationItem key="navigationItem" id="8nk-hD-nlz">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hho-DA-H4I">
                             <connections>
-                                <segue destination="Q2A-tL-vd8" kind="presentation" id="TgB-uy-HuQ"/>
+                                <segue destination="Q2A-tL-vd8" kind="presentation" identifier="addFriendSegue" id="TgB-uy-HuQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -122,12 +122,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3J3-mB-rYw">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="3J3-mB-rYw">
                                 <rect key="frame" x="15" y="185.5" width="338" height="29"/>
                                 <segments>
-                                    <segment title="Good 😁"/>
+                                    <segment title="Happy 😁"/>
                                     <segment title="Medium 😑"/>
-                                    <segment title="Bad 😡"/>
+                                    <segment title="Angry 😡"/>
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyb-Hv-bSu">
@@ -161,6 +161,10 @@
                             <constraint firstItem="NS5-Ir-Knh" firstAttribute="leading" secondItem="jyb-Hv-bSu" secondAttribute="leading" id="uBb-Uf-d0B"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="moodSegmentedControl" destination="3J3-mB-rYw" id="wFk-4Y-iCa"/>
+                        <outlet property="nameTextField" destination="80W-fN-8Tj" id="W3g-ns-bkj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDx-6x-MVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

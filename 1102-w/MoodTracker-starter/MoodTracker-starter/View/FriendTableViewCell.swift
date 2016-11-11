@@ -11,7 +11,7 @@ import UIKit
 class FriendTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    var delegate: FriendsDelegate?
+    var delegate: FriendsManager?
     var friend: Friend? // stores the friend that is displayed in this cell
     
     // MARK: - Outlets
@@ -20,10 +20,11 @@ class FriendTableViewCell: UITableViewCell {
     @IBOutlet weak var moodButton: UIButton!
     
     
+    // MARK: - Actions
     
     // Action computed when mood button is pressed
     @IBAction func moodButtonPressed(_ sender: UIButton) {
-        print(#line, #function)
+        
         delegate?.changeMoodFor(friend!)
     }
     
@@ -32,9 +33,13 @@ class FriendTableViewCell: UITableViewCell {
 // MARK: - Protocols
 
 // Manage friends
-protocol FriendsDelegate {
+protocol FriendsManager {
     
     // Change mood for a friend
     func changeMoodFor(_ friend: Friend)
+    
+    // Add a new friend
+    func addNewFriend(name: String, atIndex index: Int)
+    // TODO: better to have parameter Friend?
     
 }
