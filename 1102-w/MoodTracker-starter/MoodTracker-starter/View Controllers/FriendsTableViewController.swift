@@ -24,9 +24,18 @@ class FriendsTableViewController: UITableViewController {
     ]
     
     
-    // MARK: - View Life Cycle
+    // MARK: - View Controller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+        
+        for friend in friends {
+            print("\(friend.name): \(friend.mood.rawValue)")
+        }
     }
     
     
@@ -45,7 +54,8 @@ class FriendsTableViewController: UITableViewController {
         let currentFriend = friends[indexPath.row]
         
         cell.friend = currentFriend
-        cell.delegate = self
+        
+        cell.friendsController = self
         
         updateUIFor(cell, with: currentFriend)
         
@@ -57,7 +67,8 @@ class FriendsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addNewFriendController = segue.destination as? AddFriendViewController {
-            addNewFriendController.delegate = self
+//            addNewFriendController.delegate = self
+            addNewFriendController.friendsController = self
         }
     }
     
@@ -81,41 +92,14 @@ class FriendsTableViewController: UITableViewController {
         
         // update button
         cell.moodButton.setTitle(friend.mood.rawValue, for: .normal)
-        
-    }
-}
-
-
-// MARK: - Extensions
-
-// Extend class with protocol
-extension FriendsTableViewController: FriendsManager {
-    
-    func changeMoodFor(_ friend: Friend) {
-        // change model
-        friend.mood = Mood.getNewMood(friend.mood)
-        
-        // TODO: could get the indexPath and reloadRow instead?
-        tableView.reloadData()
     }
     
-    func addNewFriend(name: String,  atIndex index: Int) {
-        var mood: Mood
-        
-        switch index {
-        case 0:
-            mood = .happy
-        case 1:
-            mood = .medium
-        case 2:
-            mood = .angry
-        default:
-            print(#line, #function, index, "No mood selected: ERROR")
-            return // no mood selected: Major Error
-        }
-        
-        friends.append(Friend(name: name, mood: mood))
-        
-        tableView.reloadData()
+    
+    // Update the friends model and view with a completion
+    func updateFriendsWith(completion handler: () -> Void) {
+        // Can declare handler as @escaping - refers to self explicitly
+        // and @autoclosure to avoid the closure expression syntax
+        handler()
     }
+
 }
