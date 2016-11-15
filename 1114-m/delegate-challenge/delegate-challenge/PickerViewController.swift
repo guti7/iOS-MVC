@@ -30,6 +30,7 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         // start with the third index shown on the Picker view
         pickerView.selectRow(3, inComponent: 0, animated: true)
+        
     }
     
     

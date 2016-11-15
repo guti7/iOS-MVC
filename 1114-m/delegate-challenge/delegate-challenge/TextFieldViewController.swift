@@ -32,7 +32,7 @@ class TextFieldViewController: UIViewController, UITextFieldDelegate {
     
     // Asks the delegate if the specified text should be changed.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+        print(textField.text!, range.location, range.length, string)
         // change the text field text to uppercase as the user types
         textField.text = textField.text!.uppercased()
         return true
