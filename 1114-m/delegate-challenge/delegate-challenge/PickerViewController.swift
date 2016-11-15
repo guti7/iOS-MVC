@@ -10,11 +10,16 @@ import UIKit
 
 class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    // MARK: - Outlets
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var cityLabel: UILabel!
     
+    
+    // MARK: - Properties
     let cities = ["Guanajuato", "New York", "San Francisco", "Berlin", "Hamburg", "Paris"]
     
+    
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -23,6 +28,7 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         pickerView.delegate = self
         pickerView.dataSource = self
         
+        // start with the third index shown on the Picker view
         pickerView.selectRow(3, inComponent: 0, animated: true)
     }
     
