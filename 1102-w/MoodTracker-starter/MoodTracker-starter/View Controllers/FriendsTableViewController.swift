@@ -49,7 +49,7 @@ class FriendsTableViewController: UITableViewController {
         
         cell.updateFriendClosure = { friend in
             friend.mood = Mood.getNewMood(friend.mood)
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
+            self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             //self.tableView.reloadData()
         }
         
@@ -63,8 +63,10 @@ class FriendsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addNewFriendController = segue.destination as? AddFriendViewController {
-            addNewFriendController.updateFriendClosure = { (textField, segmentedControl) in
-                
+            addNewFriendController.updateFriendClosure = { friend in
+                self.friends.append(friend)
+                self.tableView.insertRows(at: [IndexPath(row: self.friends.count - 1, section: 0)], with: UITableViewRowAnimation.automatic)
+                //self.tableView.reloadData()
             }
         }
     }

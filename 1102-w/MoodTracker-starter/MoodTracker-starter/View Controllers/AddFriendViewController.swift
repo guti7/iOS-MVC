@@ -16,7 +16,7 @@ class AddFriendViewController: UIViewController {
     
     // MARK: - Variables
     
-    var updateFriendClosure: ((UITextField, UISegmentedControl) -> Void )?
+    var updateFriendClosure: ((Friend) -> Void )?
     
     
     // MARK: View Controller Lifecycle
@@ -46,9 +46,11 @@ class AddFriendViewController: UIViewController {
             return
         }
         
+        let index = moodSegmentedControl.selectedSegmentIndex
+        if let newFriend = createFriendFrom(name: nameTextField.text!, segmentIndex: index) {
+            updateFriendClosure?(newFriend)
+        }
         
-        
-        updateFriendClosure?(nameTextField, moodSegmentedControl)
         dismissViewController()
     }
     
@@ -64,21 +66,21 @@ class AddFriendViewController: UIViewController {
         presentingViewController?.dismiss(animated: true)
     }
     
-//    func createFriendFrom(name string: String, segment index: Int) -> Friend {
-//        var newMood = Mood()
-//        switch index {
-//        case 0:
-//            newMood = .happy
-//        case 1:
-//            newMood = .medium
-//        case 2:
-//            newMood = .angry
-//        default:
-//            break
-//        }
-//        
-//        return Friend(name: string, mood: newMood)
-//    }
+    func createFriendFrom(name string: String, segmentIndex index: Int) -> Friend? {
+        var newMood: Mood
+        switch index {
+        case 0:
+            newMood = .happy
+        case 1:
+            newMood = .medium
+        case 2:
+            newMood = .angry
+        default:
+            return nil
+        }
+        
+        return Friend(name: string, mood: newMood)
+    }
     
 }
 
