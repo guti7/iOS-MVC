@@ -30,14 +30,6 @@ class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-        
-        for friend in friends {
-            print("\(friend.name): \(friend.mood.rawValue)")
-        }
-    }
-    
     
     // MARK: - Data Source
     
@@ -55,7 +47,11 @@ class FriendsTableViewController: UITableViewController {
         
         cell.friend = currentFriend
         
-        cell.friendsController = self
+        cell.updateFriendClosure = { friend in
+            friend.mood = Mood.getNewMood(friend.mood)
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+            //self.tableView.reloadData()
+        }
         
         updateUIFor(cell, with: currentFriend)
         
@@ -67,8 +63,9 @@ class FriendsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addNewFriendController = segue.destination as? AddFriendViewController {
-//            addNewFriendController.delegate = self
-            addNewFriendController.friendsController = self
+            addNewFriendController.updateFriendClosure = { (textField, segmentedControl) in
+                
+            }
         }
     }
     
@@ -92,14 +89,6 @@ class FriendsTableViewController: UITableViewController {
         
         // update button
         cell.moodButton.setTitle(friend.mood.rawValue, for: .normal)
-    }
-    
-    
-    // Update the friends model and view with a completion
-    func updateFriendsWith(completion handler: () -> Void) {
-        // Can declare handler as @escaping - refers to self explicitly
-        // and @autoclosure to avoid the closure expression syntax
-        handler()
-    }
 
+    }
 }
