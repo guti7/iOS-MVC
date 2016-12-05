@@ -15,7 +15,7 @@ class AddFriendViewController: UIViewController {
     @IBOutlet weak var moodSegmentedControl: UISegmentedControl!
     
     // MARK: - Variables
-    var delegate: FriendsManager?
+    var delegate: FriendsManager!
     
     
     // MARK: View Controller Lifecycle
@@ -45,7 +45,27 @@ class AddFriendViewController: UIViewController {
             return
         }
         
-        delegate?.addNewFriend(name: nameTextField.text!, atIndex: moodSegmentedControl.selectedSegmentIndex)
+        var newMood: Mood
+        let index = moodSegmentedControl.selectedSegmentIndex
+        
+        switch index {
+        case 0:
+            newMood = .happy
+        case 1:
+            newMood = .medium
+        case 2:
+            newMood = .angry
+        default:
+            print(#line, #function, index, "No mood selected: ERROR")
+            return // no mood selected: Major Error
+        }
+        
+        let friend = Friend(name: nameTextField.text!, mood: newMood)
+        
+        
+        delegate.addNewFriend(friend)
+        
+//        delegate.addNewFriend(name: nameTextField.text!, atIndex: moodSegmentedControl.selectedSegmentIndex)
         
         dismissViewController()
     }
@@ -63,13 +83,3 @@ class AddFriendViewController: UIViewController {
     }
     
 }
-
-// MARK: - Extensions
-
-// UITextFieldDelegate
-//extension AddFriendViewController: UITextFieldDelegate {
-
-//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//        return true
-//    }
-//}

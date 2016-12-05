@@ -45,6 +45,7 @@ class FriendsTableViewController: UITableViewController {
         let currentFriend = friends[indexPath.row]
         
         cell.friend = currentFriend
+        
         cell.delegate = self
         
         updateUIFor(cell, with: currentFriend)
@@ -96,6 +97,12 @@ extension FriendsTableViewController: FriendsManager {
         friend.mood = Mood.getNewMood(friend.mood)
         
         // TODO: could get the indexPath and reloadRow instead?
+        tableView.reloadData()
+    }
+    
+    func addNewFriend(_ friend: Friend) {
+        friends.append(friend)
+        
         tableView.reloadData()
     }
     
