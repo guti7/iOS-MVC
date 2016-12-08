@@ -20,29 +20,62 @@ PlaygroundPage.current.liveView = canvas // make the canvas appear in the assist
  
  (Make sure to comment out the first implementation once you start working on the second one to avoid confusion.)
  */
+// Method 2
 // Blue View
-let margin = 20
-let widthBlue = Int(canvas.frame.width * 0.25)
-let heightBlue = Int(canvas.frame.height) - margin - margin
-let blueFrame = CGRect(x: 0, y: margin, width: widthBlue, height: heightBlue)
-
-let blueView = UIView(frame: blueFrame)
+let blueView = UIView(frame: CGRect.zero)
+blueView.translatesAutoresizingMaskIntoConstraints = false
 blueView.backgroundColor = .blue
-
 canvas.addSubview(blueView)
 
-// Green View
-// no margin to trailing
-// width = canvas width / 2
-// height = blue height / 2 
-// same center on y as blue view
-let greenWidth = Int(canvas.frame.width * 0.5)
-let greenHeight = Int(blueView.frame.height * 0.5)
-let greenX = greenWidth
-let greenFrame = CGRect(x: greenWidth, y: 0, width: greenWidth, height: greenHeight)
+NSLayoutConstraint(item: blueView, attribute: .width, relatedBy: .equal, toItem: canvas, attribute: .width, multiplier: 1 / 4, constant: 0).isActive = true
 
-let greenView = UIView(frame: greenFrame)
+let margin: CGFloat = 20
+NSLayoutConstraint(item: blueView, attribute: .top, relatedBy: .equal, toItem: canvas, attribute: .top, multiplier: 1, constant: margin).isActive = true
+
+NSLayoutConstraint(item: blueView, attribute: .bottom, relatedBy: .equal, toItem: canvas, attribute: .bottom, multiplier: 1, constant: -margin).isActive = true
+
+NSLayoutConstraint(item: blueView, attribute: .leading, relatedBy: .equal, toItem: canvas, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+
+// Green View
+
+let greenView = UIView(frame: CGRect.zero)
+greenView.translatesAutoresizingMaskIntoConstraints = false
 greenView.backgroundColor = .green
-greenView.center.y = blueView.center.y
 canvas.addSubview(greenView)
 
+NSLayoutConstraint(item: greenView, attribute: .width, relatedBy: .equal, toItem: canvas, attribute: .width, multiplier: 1 / 2, constant: 0).isActive = true
+
+NSLayoutConstraint(item: greenView, attribute: .height, relatedBy: .equal, toItem: blueView, attribute: .height, multiplier: 1 / 2, constant: 0).isActive = true
+
+NSLayoutConstraint(item: greenView, attribute: .centerY, relatedBy: .equal, toItem: blueView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+
+NSLayoutConstraint(item: greenView, attribute: .trailing, relatedBy: .equal, toItem: canvas, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+
+
+//// Method 1
+//// Blue View
+//let margin = 20
+//let widthBlue = Int(canvas.frame.width * 0.25)
+//let heightBlue = Int(canvas.frame.height) - margin - margin
+//let blueFrame = CGRect(x: 0, y: margin, width: widthBlue, height: heightBlue)
+//
+//let blueView = UIView(frame: blueFrame)
+//blueView.backgroundColor = .blue
+//
+//canvas.addSubview(blueView)
+//
+//// Green View
+//// no margin to trailing
+//// width = canvas width / 2
+//// height = blue height / 2 
+//// same center on y as blue view
+//let greenWidth = Int(canvas.frame.width * 0.5)
+//let greenHeight = Int(blueView.frame.height * 0.5)
+//let greenX = greenWidth
+//let greenFrame = CGRect(x: greenWidth, y: 0, width: greenWidth, height: greenHeight)
+//
+//let greenView = UIView(frame: greenFrame)
+//greenView.backgroundColor = .green
+//greenView.center.y = blueView.center.y
+//canvas.addSubview(greenView)
+//
