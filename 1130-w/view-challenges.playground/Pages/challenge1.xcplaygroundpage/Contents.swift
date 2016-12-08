@@ -16,3 +16,10 @@ PlaygroundPage.current.liveView = canvas // make the canvas appear in the assist
  
  (Make sure to comment out the first implementation once you start working on the second one to avoid confusion.)
  */
+
+let redWidth = canvas.frame.width * 0.5
+let redFrame = CGRect(x: 0, y: 0, width: redWidth, height: redWidth)
+let redView = UIView(frame: redFrame)
+redView.backgroundColor = .red
+redView.center = canvas.center
+canvas.addSubview(redView)

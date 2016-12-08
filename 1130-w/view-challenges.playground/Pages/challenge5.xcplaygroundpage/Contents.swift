@@ -20,4 +20,29 @@ PlaygroundPage.current.liveView = canvas // make the canvas appear in the assist
  
  (Make sure to comment out the first implementation once you start working on the second one to avoid confusion.)
  */
+// Blue View
+let margin = 20
+let widthBlue = Int(canvas.frame.width * 0.25)
+let heightBlue = Int(canvas.frame.height) - margin - margin
+let blueFrame = CGRect(x: 0, y: margin, width: widthBlue, height: heightBlue)
+
+let blueView = UIView(frame: blueFrame)
+blueView.backgroundColor = .blue
+
+canvas.addSubview(blueView)
+
+// Green View
+// no margin to trailing
+// width = canvas width / 2
+// height = blue height / 2 
+// same center on y as blue view
+let greenWidth = Int(canvas.frame.width * 0.5)
+let greenHeight = Int(blueView.frame.height * 0.5)
+let greenX = greenWidth
+let greenFrame = CGRect(x: greenWidth, y: 0, width: greenWidth, height: greenHeight)
+
+let greenView = UIView(frame: greenFrame)
+greenView.backgroundColor = .green
+greenView.center.y = blueView.center.y
+canvas.addSubview(greenView)
 
